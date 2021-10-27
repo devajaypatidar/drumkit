@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Kit</title>
+    <style>
+        html{
+            font-size:10px;
+            background: url();
+            background-size: cover;
+        }
+
+        body,html{
+            margin:0;
+            padding:0;
+            font-family: sans-serif;
+            animation-name: bg;
+            animation-duration: 30s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .keys{
+            display: flex;
+            flex: 1;
+            min-height : 100vh;
+            align-items : center;
+            justify-content : center;
+        }
+
+        .key {
+             border: 1px solid;
+             border-radius: .5rem;
+             margin: 1rem;
+             font-size: 1.5rem;
+             padding: 1rem , .5rem;
+             transition: all .07s ;
+             width: 10rem;
+             text-align: center;
+             color: rgb(207, 18, 18);
+             text-shadow: 0 0 .2rem black;
+             
+
+            }
+
+        kbd{
+            display: block;
+            font-size: 4rem;
+        }
+
+        .sound{
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: .2rem;
+            color:rgb(255, 255, 255);
+        }
+
+        .playing{
+            transform: scale(1.1);
+            border-color:rgb(207, 18, 18);
+            box-shadow:0 0 1rem 0 rgb(23, 209, 33);
+        }
+
+        @keyframes bg {
+            0%{
+                background-color:  #e2d810;
+            }
+            25%{
+                background-color: #d9138a,;
+            }
+            50%{
+                background-color: #12a4d9;
+            }
+            75%{
+                background-color: #1815be;
+            }
+            100%{
+                background-color: #322e2f;
+            }
+        }
+
+        @
+
+            
+    </style>
+</head>
+<body>
+    <div  class="keys">
+        <div  class="key" data-key ="65">
+            <kbd>A</kbd>
+            <span class="sound" > Clap</span>
+        </div>
+        <div class="key " data-key ="83">
+            <kbd>S</kbd>
+            <span class="sound" > dhol</span>
+        </div>
+        <div class="key"  data-key ="68">
+            <kbd>D</kbd>
+            <span class="sound" > tom</span>
+        </div>
+        <div class="key " data-key ="70">
+            <kbd>F</kbd>
+            <span class="sound" > crash</span>
+        </div>
+        <div class="key " data-key ="71">
+            <kbd>G</kbd>
+            <span class="sound" > hihat</span>
+        </div>
+        <div class="key " data-key ="72">
+            <kbd>H</kbd>
+            <span class="sound" > ride</span>
+        </div>
+        <div class="key " data-key ="74">
+            <kbd>J</kbd>
+            <span class="sound" > snap</span>
+        </div>
+        <div class="key " data-key ="75">
+            <kbd>K</kbd>
+            <span class="sound" > snare2</span>
+        </div> 
+        <div class="key " data-key ="76">
+            <kbd>L</kbd>
+            <span class="sound" > dancekick</span>
+        </div> 
+    </div>
+
+    <audio data-key ="65" src="clap.wav"></audio>
+    <audio data-key ="83" src="dhol.wav"></audio>
+    <audio data-key ="68" src="tom.wav"></audio>
+    <audio data-key ="70" src="crash.wav"></audio>
+    <audio data-key ="71" src="hihat.wav"></audio>
+    <audio data-key ="72" src="ride.wav"></audio>
+    <audio data-key ="74" src="snap.wav"></ddaudio>
+    <audio data-key ="75" src="snare2.wav"></audio>
+    <audio data-key ="76" src="dancekick.wav"></audio>
+
+    <script>
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            e.target.classList.remove('playing');
+          }
+        
+          function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+        
+            key.classList.add('playing');
+            audio.currentTime = 0;
+            audio.play();
+          }
+        
+          const keys = Array.from(document.querySelectorAll('.key'));
+          keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+          window.addEventListener('keydown', playSound);
+
+          
+
+          
+    </script>
+</body>
+</html>
+
+
+
+
+<!-- <script>
+   
+  </script> -->
+
+
+
+
+
+
+
+
+
+  
+  <!-- function removeTransition(e) {
+    if(e.propertyName !== 'tranaform') return;
+    console.log(this);
+    
+    this.classList.remove('playing');
+}
+window.addEventListener('keydown',function(e) {
+    const  audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+    if(!audio) return;
+    audio.currentTime =0;
+    audio.play();
+   
+    key.classList.add('playing');
+    
+})
+
+
+
+const keys= Array.from(document.querySelectorAll('.key'));
+keys.forEach(key => key.addEventListener('transitionend',removeTransition)); -->
